@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-motion="full">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desmontagem — Avaliação de UX/UI da Steam</title>
+  <meta name="description"
+    content="Trabalho acadêmico: avaliação crítica de usabilidade e interface da Steam (Valve), por análise heurística, fluxo de tarefa, auditoria WCAG 2.2 e análise competitiva." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0B1116" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1116'/%3E%3Crect x='6' y='7' width='20' height='4' fill='%2366C0F4'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%2393A4B1'/%3E%3Crect x='6' y='21' width='20' height='4' fill='%23C1553A'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- filtro de simulação de deuteranopia (usado pela P2) -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <filter id="deuteranopia" color-interpolation-filters="linearRGB">
+      <feColorMatrix type="matrix" values="
+        0.625 0.375 0.000 0 0
+        0.700 0.300 0.000 0 0
+        0.000 0.300 0.700 0 0
+        0.000 0.000 0.000 1 0" />
+    </filter>
+  </svg>
+
+  <!-- ============================================================= -->
+  <!-- 00 — PRELOADER                                                -->
+  <!-- ============================================================= -->
+  <div id="preloader" role="status" aria-live="polite" aria-label="Carregando o site">
+    <div class="preloader__panel">
+      <p class="preloader__pkg mono">steam_ux_audit.pkg</p>
+      <div class="preloader__bar" aria-hidden="true">
+        <span class="preloader__fill" style="transform:scaleX(0)"></span>
+      </div>
+      <div class="preloader__row mono">
+        <span class="preloader__pct">0%</span>
+        <span class="preloader__rate">0,00 MB/s</span>
+      </div>
+      <p class="preloader__note mono">Descompactando avaliação · Parte 2</p>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- HEADER / NAV                                                  -->
+  <!-- ============================================================= -->
+  <header class="site-header" id="topo">
+    <div class="site-header__inner">
+      <a class="wordmark" href="#topo">
+        <span class="wordmark__strong">Desmontagem</span>
+        <span class="wordmark__sub mono">avaliação de UX/UI · Steam</span>
+      </a>
+      <nav class="site-nav" aria-label="Seções">
+        <span class="site-nav__progress mono" aria-hidden="true"><span data-nav-index>00</span> / 11</span>
+        <button type="button" class="grid-toggle" aria-pressed="false" data-grid-toggle>
+          <span class="grid-toggle__box" aria-hidden="true"></span>
+          Mostrar grade
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- fixed 3D layer behind sections 01–02 -->
+  <div class="stage" aria-hidden="true">
+    <canvas id="hero-canvas" class="stage__canvas" data-webgl></canvas>
+    <div class="stage__fallback" data-hero-fallback>
+      <div class="capsule-grid">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <main id="conteudo">
+
+    <!-- ========================================================= -->
+    <!-- 01 — HERO                                                  -->
+    <!-- ========================================================= -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__inner u-container">
+        <p class="hero__eyebrow mono">Trabalho acadêmico · avaliação de produto</p>
+        <h1 class="hero__title display" id="hero-title">
+          <span>Vamos</span>
+          <span>abrir</span>
+          <span>a Steam</span>
+        </h1>
+        <p class="hero__lede">
+          A Steam é uma interface densa, acumulada em camadas por mais de 20 anos.
+          Este site pega essa interface e a desmonta em público — da superfície polida
+          até o esqueleto estrutural.
+        </p>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-label mono">rolar</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 02 — DESMONTAGEM (pinned)                                  -->
+    <!-- ========================================================= -->
+    <section class="disassembly" id="desmontagem" aria-labelledby="disassembly-title">
+      <div class="disassembly__pin">
+        <div class="u-container">
+          <header class="section-head">
+            <p class="section-head__index mono">02</p>
+            <h2 class="section-head__title display" id="disassembly-title">Da superfície<br />ao esqueleto</h2>
+          </header>
+
+          <ol class="disassembly__steps" data-disassembly-steps>
+            <li class="dstep" data-step="0" aria-current="true">
+              <span class="dstep__k mono">01</span>
+              <div>
+                <h3>Superfície</h3>
+                <p>Um card da loja: arte cheia, brilho, reflexo, avaliação colorida. É o que a
+                  Steam mostra.</p>
+              </div>
+            </li>
+            <li class="dstep" data-step="1">
+              <span class="dstep__k mono">02</span>
+              <div>
+                <h3>Wireframe</h3>
+                <p>A imagem some. Restam o retângulo, as linhas de grid, a bounding box e os
+                  rótulos de espaçamento. É o que sustenta o card.</p>
+              </div>
+            </li>
+            <li class="dstep" data-step="2">
+              <span class="dstep__k mono">03</span>
+              <div>
+                <h3>Camadas</h3>
+                <p>O card se separa em arte, título, preço, tags e avaliação — cinco decisões
+                  independentes empilhadas em um espaço só.</p>
+              </div>
+            </li>
+            <li class="dstep" data-step="3">
+              <span class="dstep__k mono">04</span>
+              <div>
+                <h3>Estrutura</h3>
+                <p>Essas cinco camadas são as colunas deste site. Cada uma vira uma pergunta
+                  da avaliação.</p>
+              </div>
+            </li>
+          </ol>
+
+          <!-- Accessible / no-WebGL visual: the same idea as static SVG panels -->
+          <div class="disassembly__diagram" data-disassembly-diagram>
+            <figure class="dpanel" data-panel="0">
+              <div class="dpanel__art"><span class="dpanel__glow"></span></div>
+              <figcaption class="mono">superfície</figcaption>
+            </figure>
+            <figure class="dpanel" data-panel="1">
+              <div class="dpanel__wire">
+                <span class="dpanel__dim dpanel__dim--w mono">460</span>
+                <span class="dpanel__dim dpanel__dim--h mono">215</span>
+              </div>
+              <figcaption class="mono">wireframe</figcaption>
+            </figure>
+            <figure class="dpanel" data-panel="2">
+              <div class="dpanel__layers">
+                <span data-layer>arte</span>
+                <span data-layer>título</span>
+                <span data-layer>preço</span>
+                <span data-layer>tags</span>
+                <span data-layer>avaliação</span>
+              </div>
+              <figcaption class="mono">camadas</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 03 — CONTEXTO                                              -->
+    <!-- ========================================================= -->
+    <section class="section context" id="contexto" aria-labelledby="context-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">03</p>
+          <h2 class="section-head__title display" id="context-title">O que estamos<br />avaliando</h2>
+        </header>
+
+        <div class="prose">
+          <p>A Steam é uma plataforma da Valve, no ar desde <strong>2003</strong>. Começou como um
+            sistema de atualização dos jogos da própria Valve e virou a maior loja de jogos para PC
+            do mundo. Hoje acumula pelo menos <strong>cinco produtos</strong> dentro de uma casca só,
+            construídos em épocas diferentes, por times diferentes, com linguagens visuais diferentes
+            — e nunca reunificados de verdade.</p>
+        </div>
+
+        <ol class="products">
+          <li><span class="products__k mono">01</span>
+            <h3>Loja</h3>
+            <p>Catálogo, descoberta, vitrine, promoções.</p>
+          </li>
+          <li><span class="products__k mono">02</span>
+            <h3>Biblioteca / launcher</h3>
+            <p>Instalar, atualizar, executar, gerenciar arquivos.</p>
+          </li>
+          <li><span class="products__k mono">03</span>
+            <h3>Rede social</h3>
+            <p>Amigos, chat, grupos, perfis, transmissões.</p>
+          </li>
+          <li><span class="products__k mono">04</span>
+            <h3>Conteúdo de usuário</h3>
+            <p>Workshop, guias, reviews, Mercado da Comunidade.</p>
+          </li>
+          <li><span class="products__k mono">05</span>
+            <h3>SO e hardware</h3>
+            <p>SteamOS, Steam Deck, Big Picture, Steam Machine.</p>
+          </li>
+        </ol>
+
+        <p class="context__claim">
+          Quase todo problema de interface da Steam é consequência de cinco produtos disputando
+          o mesmo espaço de navegação.
+        </p>
+
+        <div class="stats" data-counters>
+          <div class="stat">
+            <span class="stat__num mono" data-count-to="2003" data-count-plain>2003</span>
+            <span class="stat__label">ano de lançamento</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num mono" data-count-to="5">0</span>
+            <span class="stat__label">produtos numa casca só</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num mono" data-count-to="15000" data-count-suffix=" +">0</span>
+            <span class="stat__label">lançamentos por ano na loja</span>
+          </div>
+          <div class="stat stat--pending">
+            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
+            <span class="stat__label">usuários ativos mensais · fonte a citar</span>
+          </div>
+          <div class="stat stat--pending">
+            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
+            <span class="stat__label">pico de usuários simultâneos · SteamDB</span>
+          </div>
+          <div class="stat stat--pending">
+            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
+            <span class="stat__label">jogos no catálogo · data de consulta</span>
+          </div>
+        </div>
+
+        <h3 class="context__subhead">O modelo de negócio molda a interface</h3>
+        <p class="prose">A Steam é um marketplace de três lados. Passe o mouse ou o foco em cada lado
+          para ver que incentivo ele impõe à interface.</p>
+
+        <div class="triangle" data-triangle>
+          <div class="triangle__plot">
+            <svg class="triangle__svg" viewBox="0 0 520 440" role="img"
+              aria-label="Triângulo do marketplace de três lados: jogador, desenvolvedor e Valve, ligados pela wishlist no centro.">
+              <polygon class="triangle__edge" data-edge="all" points="260,40 480,400 40,400" />
+              <line class="triangle__edge" data-edge="jogador-valve" x1="260" y1="40" x2="480" y2="400" />
+              <line class="triangle__edge" data-edge="valve-dev" x1="480" y1="400" x2="40" y2="400" />
+              <line class="triangle__edge" data-edge="dev-jogador" x1="40" y1="400" x2="260" y2="40" />
+              <circle class="triangle__hub" cx="260" cy="280" r="34" />
+              <text class="triangle__hub-label mono" x="260" y="285" text-anchor="middle">wishlist</text>
+            </svg>
+            <button type="button" class="triangle__node triangle__node--top" data-side="jogador"
+              aria-describedby="side-jogador">Jogador</button>
+            <button type="button" class="triangle__node triangle__node--right" data-side="valve"
+              aria-describedby="side-valve">Valve</button>
+            <button type="button" class="triangle__node triangle__node--left" data-side="dev"
+              aria-describedby="side-dev">Desenvolvedor</button>
+          </div>
+
+          <div class="triangle__readout">
+            <p id="side-jogador" class="triangle__side" data-side-body="jogador" hidden>
+              <strong>Jogador</strong> quer achar algo bom para jogar, pelo menor preço.
+              <span class="triangle__imposes">Impõe à interface:</span> filtro, prova social, comparação.
+            </p>
+            <p id="side-dev" class="triangle__side" data-side-body="dev" hidden>
+              <strong>Desenvolvedor</strong> quer ser encontrado no meio de milhares de lançamentos.
+              <span class="triangle__imposes">Impõe à interface:</span> espaço na vitrine, tags, wishlist.
+            </p>
+            <p id="side-valve" class="triangle__side" data-side-body="valve" hidden>
+              <strong>Valve</strong> quer comissão sobre o GMV e retenção da conta.
+              <span class="triangle__imposes">Impõe à interface:</span> descoberta que converte e lock-in.
+            </p>
+            <p class="triangle__side triangle__side--default" data-side-body="default">
+              A <strong>wishlist</strong> costura os três lados: "salvar para depois" para o jogador,
+              principal sinal de demanda pré-lançamento para o desenvolvedor, gatilho de e-mail de
+              promoção para a Valve. Ela não está em destaque porque é útil — está em destaque
+              porque é a métrica que sustenta o negócio dos três lados ao mesmo tempo.
+            </p>
+          </div>
+        </div>
+
+        <p class="context__claim context__claim--soft">
+          A home da Steam não é uma home de loja. É um leilão de atenção com regras editoriais.
+          Isso explica a densidade — e explica por que "simplificar a home" é ingênuo sem uma
+          resposta para "onde os 15 mil lançamentos anuais vão aparecer, então?".
+        </p>
+
+        <div class="note" role="note">
+          <p class="note__k mono">Atualizações recentes · abril de 2026</p>
+          <p>A Valve entregou arte de jogos em resolução mais alta e uma home mais larga e
+            responsiva; a navegação da loja unificou a antiga barra azul superior com a sidebar
+            em um menu único e persistente; o Workshop ganhou filtros sem recarregar página e
+            buscas salvas. São melhorias reais e incrementais — e a crítica recorrente de que
+            descoberta e busca continuam mal resolvidas não foi endereçada por elas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 04 — MÉTODO                                                -->
+    <!-- ========================================================= -->
+    <section class="section method" id="metodo" aria-labelledby="method-title">
+      <div class="u-container">
+        <header class="section-head section-head--quiet">
+          <p class="section-head__index mono">04</p>
+          <h2 class="section-head__title display" id="method-title">Método</h2>
+        </header>
+
+        <p class="prose">Para não virar opinião, a avaliação usou quatro instrumentos. Cada
+          integrante avaliou em separado antes de consolidar — uma avaliação heurística com
+          três a cinco avaliadores encontra a maior parte dos problemas de usabilidade de um
+          produto.</p>
+
+        <div class="method__grid">
+          <article>
+            <p class="method__k mono">I</p>
+            <h3>Análise heurística</h3>
+            <p>As 10 heurísticas de Nielsen, com nota de 0 a 4 por heurística
+              (0 = sem problema, 4 = problema catastrófico), no formato de severidade de Nielsen.</p>
+          </article>
+          <article>
+            <p class="method__k mono">II</p>
+            <h3>Análise de fluxo de tarefa</h3>
+            <p>Quatro tarefas cronometradas e contadas em cliques: comprar um jogo; instalar
+              e jogar; encontrar um jogo por critério ("RPG cooperativo local abaixo de R$ 40");
+              pedir reembolso.</p>
+          </article>
+          <article>
+            <p class="method__k mono">III</p>
+            <h3>Auditoria de acessibilidade</h3>
+            <p>WCAG 2.2 nível AA: contraste medido, navegação só por teclado, redimensionamento
+              de texto, movimento.</p>
+          </article>
+          <article>
+            <p class="method__k mono">IV</p>
+            <h3>Análise competitiva</h3>
+            <p>Epic Games Store, GOG Galaxy, itch.io, Xbox App, PlayStation Store.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 05 — PERGUNTA 1                                            -->
+    <!-- ========================================================= -->
+    <section class="section question" id="p1" aria-labelledby="p1-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">05 · Pergunta 1</p>
+          <h2 class="section-head__title display" id="p1-title">É fácil<br />de usar?</h2>
+        </header>
+
+        <p class="question__short">É fácil para o que você já sabe fazer, e difícil para tudo
+          o que você faz raramente.</p>
+
+        <div class="flows" data-flows>
+          <div class="flow" data-flow="comprar">
+            <h3 class="flow__title">Comprar e jogar</h3>
+            <ol class="flow__nodes">
+              <li>Página do produto</li>
+              <li>Adicionar ao carrinho</li>
+              <li>Comprar para mim</li>
+              <li>Confirmar pagamento</li>
+              <li>Instalar</li>
+              <li>Jogar</li>
+            </ol>
+            <dl class="flow__meter">
+              <div><dt class="mono">passos</dt><dd class="mono" data-count-to="6">0</dd></div>
+              <div><dt class="mono">decisões</dt><dd class="mono" data-count-to="2">0</dd></div>
+            </dl>
+          </div>
+          <div class="flow" data-flow="reembolso">
+            <h3 class="flow__title">Pedir reembolso</h3>
+            <ol class="flow__nodes">
+              <li>Ajuda</li>
+              <li>Suporte da Steam</li>
+              <li>Escolher a compra</li>
+              <li>"Quero um reembolso"</li>
+              <li>Escolher o motivo</li>
+              <li>Sub-motivo em cadeia</li>
+              <li>Método de reembolso</li>
+              <li>Enviar solicitação</li>
+              <li>Aguardar análise</li>
+            </ol>
+            <dl class="flow__meter">
+              <div><dt class="mono">passos</dt>
+                <dd class="mono"><span class="verificar verificar--sm">VERIFICAR</span></dd>
+              </div>
+              <div><dt class="mono">decisões</dt>
+                <dd class="mono"><span class="verificar verificar--sm">VERIFICAR</span></dd>
+              </div>
+            </dl>
+          </div>
+          <p class="flows__reading mono">A assimetria entre os dois números é o argumento.</p>
+        </div>
+
+        <div class="split">
+          <div class="split__col">
+            <h3 class="split__head">O que funciona</h3>
+            <ul class="findings findings--good">
+              <li>
+                <p>O caminho principal — descobrir → comprar → instalar → jogar — é curto e
+                  previsível. Um botão primário por tela, sempre da mesma cor, com estado de
+                  progresso sempre visível. Vinte anos de repetição criaram um modelo mental
+                  que quase não falha.</p>
+              </li>
+              <li>
+                <p>O download tem feedback exemplar: velocidade, tempo restante, fila
+                  reordenável, pausa. É o melhor exemplo de visibilidade do status do sistema
+                  da plataforma inteira.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="split__col">
+            <h3 class="split__head">O que não funciona</h3>
+            <ol class="findings findings--bad">
+              <li>
+                <h4>Densidade sem prioridade na home</h4>
+                <p>Destaque, recomendados, especiais, novidades, categorias, transmissões,
+                  curadoria, top vendas — dezenas de alvos com o mesmo peso visual. Pela Lei de
+                  Hick, o tempo de decisão cresce com o número e a complexidade das opções.
+                  Para o veterano isso é bom; para o novo é paralisante. A Steam otimizou para
+                  o veterano.</p>
+              </li>
+              <li>
+                <h4>Busca e filtro fracos para intenção específica</h4>
+                <p>"RPG cooperativo local abaixo de R$ 40 que roda em máquina fraca": a busca
+                  responde bem a nome de jogo e mal a intenção. Os filtros estão espalhados entre
+                  busca avançada, página de tags e fila de descoberta — três lugares para a mesma
+                  intenção. E as tags são da comunidade, o que gera ruído.</p>
+              </li>
+              <li>
+                <h4>Configurações fragmentadas</h4>
+                <p>Há preferências no cliente, na conta pelo site, por jogo (Propriedades) e no
+                  perfil da comunidade. "Desativar atualização automática de um jogo" exige saber
+                  que isso mora em Propriedades do jogo, não em Configurações. A arquitetura
+                  reflete a estrutura interna do produto, não a tarefa do usuário — a Lei de
+                  Conway virando interface.</p>
+              </li>
+              <li>
+                <h4>O reembolso</h4>
+                <p>Comprar leva poucos cliques. Pedir reembolso leva uma árvore de decisão dentro
+                  do Suporte, com perguntas em cadeia. A assimetria entre a facilidade de entrar e
+                  a dificuldade de sair é o achado mais forte desta seção — e só aparece quando se
+                  mede fluxo em vez de olhar tela.</p>
+              </li>
+              <li>
+                <h4>Cliente ≠ site</h4>
+                <p>O cliente desktop e o site são parecidos, não iguais: páginas que existem em um
+                  e não no outro, navegação diferente, o botão "voltar" que às vezes volta. O
+                  cliente é um navegador embutido, e isso vaza para o usuário como latência e
+                  inconsistência.</p>
+              </li>
+              <li>
+                <h4>Onboarding inexistente</h4>
+                <p>Instale a Steam pela primeira vez: você cai na loja sem orientação sobre
+                  biblioteca, wishlist, fila de descoberta, reembolso ou família. A plataforma
+                  assume que você já a conhece. Funcionou por inércia — é uma dívida séria.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <figure class="datatable">
+          <figcaption class="mono">Nota de fluxo · preencher com a medição do grupo</figcaption>
+          <div class="datatable__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Tarefa</th>
+                  <th scope="col">Cliques</th>
+                  <th scope="col">Decisões</th>
+                  <th scope="col">Tempo</th>
+                  <th scope="col">Sucesso sem ajuda</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Comprar um jogo</th>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>sim</td>
+                </tr>
+                <tr>
+                  <th scope="row">Instalar e jogar</th>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>sim</td>
+                </tr>
+                <tr>
+                  <th scope="row">Achar jogo por critério</th>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>parcial</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pedir reembolso</th>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </figure>
+
+        <div class="verdict verdict--positive" data-verdict>
+          <span class="verdict__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 4 L20 18 L4 18 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <p class="verdict__label">Veredito · Positivo com ressalvas</p>
+          <p class="verdict__body">Fácil no caminho feliz, hostil fora dele.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 06 — PERGUNTA 2                                            -->
+    <!-- ========================================================= -->
+    <section class="section question" id="p2" aria-labelledby="p2-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">06 · Pergunta 2</p>
+          <h2 class="section-head__title display" id="p2-title">O design ajuda<br />a entender<br />as funções?</h2>
+        </header>
+
+        <p class="question__short">No nível do componente, sim — e muito bem. No nível do
+          sistema, não.</p>
+
+        <div class="hotspots" data-hotspots>
+          <div class="hotspots__toolbar" role="group" aria-label="Simulações de acessibilidade">
+            <button type="button" class="toggle" aria-pressed="false" data-vision="grayscale">
+              <span class="toggle__box" aria-hidden="true"></span> Remover cor
+            </button>
+            <button type="button" class="toggle" aria-pressed="false" data-vision="deuteranopia">
+              <span class="toggle__box" aria-hidden="true"></span> Simular deuteranopia
+            </button>
+            <p class="hotspots__hint mono" data-vision-hint>visão típica</p>
+          </div>
+
+          <div class="hotspots__stage">
+            <figure class="img-frame" data-vision-target>
+              <img src="public/img/steam-product-page.png" alt="Captura da página de produto da
+                loja Steam, com trailer, arte, barra de avaliações, preço e botões de lista de
+                desejos, seguir e ignorar. Captura a ser feita pelo grupo." loading="lazy"
+                onerror="this.closest('.img-frame').classList.add('is-missing')" />
+              <figcaption class="mono">public/img/steam-product-page.png · captura do grupo</figcaption>
+
+              <button type="button" class="hotspot" style="--x:24%;--y:30%" data-hotspot="avaliacoes"
+                aria-label="Hotspot 1: barra de avaliações" aria-expanded="false">1</button>
+              <button type="button" class="hotspot" style="--x:78%;--y:24%" data-hotspot="botao"
+                aria-label="Hotspot 2: botão verde de ação" aria-expanded="false">2</button>
+              <button type="button" class="hotspot" style="--x:80%;--y:52%" data-hotspot="acoes"
+                aria-label="Hotspot 3: lista de desejos, seguir e ignorar" aria-expanded="false">3</button>
+              <button type="button" class="hotspot" style="--x:20%;--y:68%" data-hotspot="requisitos"
+                aria-label="Hotspot 4: requisitos de sistema" aria-expanded="false">4</button>
+              <button type="button" class="hotspot" style="--x:52%;--y:84%" data-hotspot="tags"
+                aria-label="Hotspot 5: tags da comunidade" aria-expanded="false">5</button>
+            </figure>
+
+            <div class="hotspots__readout" role="region" aria-live="polite" aria-label="Detalhe do hotspot">
+              <article data-hotspot-body="avaliacoes" hidden>
+                <h3><span class="mono">1</span> Barra de avaliações</h3>
+                <p class="tag-good mono">comunica com excelência</p>
+                <p>Um dos melhores componentes de visualização de dados em produto de consumo que
+                  existe. Combina rótulo em linguagem natural ("Muito positivas"), percentual,
+                  contagem absoluta, separação entre recentes e totais e — ao expandir — um gráfico
+                  temporal que mostra quando a percepção mudou. Responde "isso é bom?" e "isso
+                  mudou?" com o mesmo componente.</p>
+              </article>
+              <article data-hotspot-body="botao" hidden>
+                <h3><span class="mono">2</span> Botão verde</h3>
+                <p class="tag-good mono">comunica com excelência</p>
+                <p>Ação primária sempre da mesma cor, sempre no mesmo lugar da hierarquia. Custa
+                  nada e resolve tudo.</p>
+              </article>
+              <article data-hotspot-body="acoes" hidden>
+                <h3><span class="mono">3</span> Lista de desejos · Seguir · Ignorar</h3>
+                <p class="tag-bad mono">atrapalha</p>
+                <p>Três ações parecidas, com significados diferentes, e a interface não explica a
+                  diferença em lugar nenhum. Boa parte dos usuários usa a wishlist como "gostei" e
+                  nunca descobre que "Seguir" existe para receber notícias sem sinalizar intenção
+                  de compra.</p>
+              </article>
+              <article data-hotspot-body="requisitos" hidden>
+                <h3><span class="mono">4</span> Requisitos de sistema</h3>
+                <p class="tag-good mono">comunica com excelência</p>
+                <p>Existem, são padronizados e ficam na mesma posição em toda página de produto.
+                  Consistência estrutural é o que permite comparação.</p>
+              </article>
+              <article data-hotspot-body="tags" hidden>
+                <h3><span class="mono">5</span> Tags da comunidade</h3>
+                <p class="tag-bad mono">atrapalha</p>
+                <p>Preenchidas pela comunidade: geram ruído (jogos marcados como "Souls-like" por
+                  marketing, não por gênero) e não substituem um sistema de gênero confiável.</p>
+              </article>
+              <p class="hotspots__placeholder" data-hotspot-body="default">
+                Selecione um hotspot numerado sobre a captura. Os toggles acima aplicam
+                <em>grayscale</em> e um filtro de deuteranopia à imagem — a prova visual da
+                dependência de cor, feita ao vivo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split__col">
+            <h3 class="split__head">Onde o design comunica com excelência</h3>
+            <ul class="findings findings--good">
+              <li>
+                <p><strong>A barra de avaliações.</strong> Rótulo em linguagem natural,
+                  percentual, contagem absoluta, recentes contra totais e um gráfico temporal ao
+                  expandir. Responde "isso é bom?" e "isso mudou?" no mesmo componente.</p>
+              </li>
+              <li>
+                <p><strong>O botão verde.</strong> Ação primária sempre da mesma cor, sempre no
+                  mesmo lugar da hierarquia. Custa nada e resolve tudo.</p>
+              </li>
+              <li>
+                <p><strong>Estados de sistema.</strong> Baixando, atualizando, jogando, offline,
+                  na fila — todos com representação visual distinta e persistente. O usuário
+                  sempre sabe o que a máquina está fazendo.</p>
+              </li>
+              <li>
+                <p><strong>Requisitos de sistema.</strong> Padronizados e na mesma posição em
+                  toda página de produto. Consistência estrutural é o que permite comparação.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="split__col">
+            <h3 class="split__head">Onde o design atrapalha</h3>
+            <ol class="findings findings--bad">
+              <li>
+                <h4>Arquitetura da informação por marca, não por tarefa</h4>
+                <p>Loja, Comunidade, [seu nome], Biblioteca. Dentro de Comunidade: Início,
+                  Discussões, Workshop, Mercado, Transmissões. Nada disso é uma tarefa do usuário —
+                  são produtos internos da Valve virados em itens de menu. "Vender um item que
+                  ganhei" mora em Comunidade &gt; Mercado, e não em Biblioteca ou no Inventário.
+                  O nome do lugar não descreve o que se faz lá.</p>
+              </li>
+              <li>
+                <h4>Três ações parecidas, significados diferentes</h4>
+                <p>Lista de desejos, Seguir e Ignorar convivem na página de produto, alteram o que
+                  você vê depois de formas diferentes, e a diferença não é explicada.</p>
+              </li>
+              <li>
+                <h4>Dependência de cor</h4>
+                <p>Sentimento de avaliação, estado de amigo (online / ausente / jogando),
+                  disponibilidade de item — muito é codificado por cor. Alguns lugares reforçam
+                  com texto, outros não. Em capsules pequenas e listas compactas, a cor às vezes é
+                  o único canal. Isso viola o critério WCAG 1.4.1 (Uso de cor).</p>
+              </li>
+              <li>
+                <h4>Camadas históricas visíveis</h4>
+                <p>Coexistem hoje, na mesma sessão, pelo menos quatro gerações de interface: a loja
+                  renovada, as páginas antigas de comunidade e perfil (que ainda parecem 2011), o
+                  Big Picture / Deck e o chat. Fontes, densidades e botões diferentes. O custo não
+                  é estético: é cognitivo — cada vez que a linguagem muda, o usuário reaprende.</p>
+              </li>
+              <li>
+                <h4>Textos pequenos e alvos apertados</h4>
+                <p>Filtros da biblioteca, itens do inventário, links do rodapé de conta — muitos
+                  elementos com texto de 11–12px e área de clique justa. Em 1440p ou 4K sem
+                  escalonamento, vira problema real. A configuração de escalonamento de texto
+                  existe, mas o resultado é irregular e o layout desalinha.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <figure class="datatable">
+          <figcaption class="mono">Auditoria de acessibilidade · WCAG 2.2 AA · preencher com medição</figcaption>
+          <div class="datatable__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Critério</th>
+                  <th scope="col">O que verificar</th>
+                  <th scope="col">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1.4.3 Contraste mínimo</th>
+                  <td>texto secundário sobre fundo escuro, medido com ferramenta</td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">1.4.1 Uso de cor</th>
+                  <td>há rótulo textual junto de todo estado colorido?</td>
+                  <td class="cell-warn">provável falha parcial</td>
+                </tr>
+                <tr>
+                  <th scope="row">2.1.1 Teclado</th>
+                  <td>percorrer loja e biblioteca só com Tab / Enter</td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">2.4.7 Foco visível</th>
+                  <td>o anel de foco aparece em todos os controles?</td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">1.4.4 Redimensionar texto</th>
+                  <td>zoom 200% sem perda de conteúdo</td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">2.2.2 Pausar movimento</th>
+                  <td>trailers e GIFs animados com controle de pausa?</td>
+                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">2.5.8 Tamanho do alvo</th>
+                  <td>alvos de 24×24 CSS px mínimos</td>
+                  <td class="cell-warn">provável falha em listas densas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </figure>
+
+        <div class="verdict verdict--mixed" data-verdict>
+          <span class="verdict__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 4 L20 12 L12 20 L4 12 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <p class="verdict__label">Veredito · Misto</p>
+          <p class="verdict__body">Componentes brilhantes dentro de um sistema desorganizado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 07 — PERGUNTA 3                                            -->
+    <!-- ========================================================= -->
+    <section class="section question" id="p3" aria-labelledby="p3-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">07 · Pergunta 3</p>
+          <h2 class="section-head__title display" id="p3-title">Você sente<br />vontade de<br />continuar?</h2>
+        </header>
+
+        <p class="question__short">Sim — mas é importante separar "quero" de "não consigo sair".
+          Essa distinção é o que diferencia uma análise de produto de uma resenha.</p>
+
+        <div class="loop" data-loop>
+          <div class="loop__diagram">
+            <svg viewBox="0 0 320 320" role="img"
+              aria-label="Ciclo de engajamento: descoberta, wishlist, e-mail de promoção, urgência, compra, biblioteca e de volta à descoberta.">
+              <circle class="loop__ring" cx="160" cy="160" r="120" />
+              <g class="loop__steps" data-loop-steps>
+                <text x="160" y="48" text-anchor="middle" data-loop-step="0">descoberta</text>
+                <text x="278" y="130" text-anchor="middle" data-loop-step="1">wishlist</text>
+                <text x="262" y="252" text-anchor="middle" data-loop-step="2">e-mail de promoção</text>
+                <text x="160" y="292" text-anchor="middle" data-loop-step="3">urgência</text>
+                <text x="58" y="252" text-anchor="middle" data-loop-step="4">compra</text>
+                <text x="42" y="130" text-anchor="middle" data-loop-step="5">biblioteca</text>
+              </g>
+              <circle class="loop__cursor" data-loop-cursor cx="160" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="loop__controls">
+            <p class="prose">Cada etapa tem um mecanismo de interface dedicado: contador
+              regressivo de promoção, preço antigo riscado ao lado do novo (ancoragem),
+              percentual de desconto <span class="loop__note">(a Steam usa verde-ação aqui;
+              nós reservamos essa cor)</span>, "X pessoas jogando agora" (prova social),
+              badge de "Escolha dos curadores".</p>
+
+            <label class="slider" for="loop-weight">
+              <span class="slider__label">Peso do mecanismo de urgência / lock-in
+                <span class="mono" data-loop-value>50</span></span>
+              <input type="range" id="loop-weight" min="0" max="100" value="50" step="1"
+                aria-describedby="loop-meters" />
+            </label>
+
+            <div class="meters" id="loop-meters">
+              <div class="meter">
+                <p class="meter__label">Retenção por valor
+                  <span class="mono" data-meter="valor">50</span></p>
+                <div class="meter__track"><span class="meter__fill" data-meter-fill="valor"></span></div>
+                <p class="meter__hint">biblioteca que funciona, promoções reais, reviews da
+                  comunidade, reembolso que existe, Workshop e guias de graça, Steam Deck e
+                  Big Picture na mesma conta.</p>
+              </div>
+              <div class="meter">
+                <p class="meter__label">Retenção por custo de troca
+                  <span class="mono" data-meter="custo">50</span></p>
+                <div class="meter__track"><span class="meter__fill" data-meter-fill="custo"></span></div>
+                <p class="meter__hint">biblioteca não portável, conquistas e tempo de jogo não
+                  transferíveis, lista de amigos que não vai embora junto, itens de inventário
+                  com valor de mercado real. Efeito de dotação: a Valve mantém tudo isso sempre
+                  visível.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split__col">
+            <h3 class="split__head">Retenção por valor</h3>
+            <ul class="findings findings--good">
+              <li><p>A biblioteca funciona: instala, roda, atualiza, sincroniza save na nuvem.</p></li>
+              <li><p>Preço: promoções sazonais reais e agressivas.</p></li>
+              <li><p>Reviews da comunidade: ninguém compra às cegas.</p></li>
+              <li><p>Reembolso existe e funciona, mesmo com fluxo ruim — reduz o risco percebido
+                de comprar.</p></li>
+              <li><p>Workshop e guias: valor gerado por outros usuários, de graça.</p></li>
+              <li><p>Steam Deck e Big Picture: a mesma conta atravessa contextos de uso diferentes.</p></li>
+            </ul>
+          </div>
+          <div class="split__col">
+            <h3 class="split__head">Retenção por custo de troca</h3>
+            <ul class="findings findings--bad">
+              <li><p>A biblioteca não é portável. Anos de compras não migram para outro lugar.</p></li>
+              <li><p>Conquistas, tempo de jogo, nível de perfil, cartas e badges — capital social
+                não transferível.</p></li>
+              <li><p>A lista de amigos está lá, e os amigos não vão embora junto.</p></li>
+              <li><p>Itens de inventário com valor de mercado real.</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note" role="note">
+          <p class="note__k mono">Padrões escuros? Leves, mas existem</p>
+          <p>Escassez artificial (contador de fim de promoção quando a promoção é sazonal e
+            previsível), ancoragem de preço, carrinho que sugere itens adicionais. Mas é preciso
+            ser justo: não há assinatura escondida, não há cancelamento sabotado, não há loot box
+            disfarçada na plataforma em si, e o reembolso é uma política pública e real. Comparada
+            à média do mercado de jogos, a Steam é acima da média em ética de interface. Uma
+            crítica que não reconhece isso perde credibilidade.</p>
+        </div>
+
+        <p class="context__claim context__claim--soft">
+          Se a biblioteca fosse portável amanhã, quantos usuários ficariam? Ninguém sabe. E é
+          exatamente isso que torna a pergunta interessante.
+        </p>
+
+        <div class="verdict verdict--positive" data-verdict>
+          <span class="verdict__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 4 L20 18 L4 18 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <p class="verdict__label">Veredito · Muito positivo</p>
+          <p class="verdict__body">Com a ressalva de que boa parte da fidelidade é estrutural,
+            não conquistada pela experiência.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 08 — PERGUNTA 4                                            -->
+    <!-- ========================================================= -->
+    <section class="section question" id="p4" aria-labelledby="p4-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">08 · Pergunta 4</p>
+          <h2 class="section-head__title display" id="p4-title">O que você<br />mudaria?</h2>
+        </header>
+
+        <p class="question__short">Cada proposta segue problema → hipótese → solução → métrica.
+          Sem métrica, é gosto pessoal.</p>
+
+        <ol class="proposals" data-proposals>
+          <li class="proposal">
+            <h3><span class="mono">01</span> Navegação por tarefa, não por produto interno</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>Loja · Comunidade · Biblioteca · Perfil — a estrutura organizacional da Valve.
+                    Funções relacionadas em ramos distantes.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Descobrir · Jogar · Conectar · Negociar — quatro entradas por intenção, com
+                    busca global unificada por atalho de teclado em qualquer tela.</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 1" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>O menu expõe a estrutura da Valve em vez das intenções do
+                usuário.</dd></div>
+              <div><dt>Hipótese</dt><dd>Reorganizar por intenção reduz o tempo até funções
+                secundárias sem prejudicar o caminho principal.</dd></div>
+              <div><dt>Solução</dt><dd>Menu de quatro entradas por intenção + busca global
+                (jogos, amigos, itens, ajuda, config) por atalho.</dd></div>
+              <div><dt>Métrica</dt><dd>Tempo para tarefas secundárias; uso da busca global;
+                tickets de "onde fica X".</dd></div>
+              <div><dt>Trade-off</dt><dd>Renomear navegação com 20 anos de memória muscular tem
+                custo de reaprendizado enorme. Exige transição com os dois rótulos visíveis, testada
+                em 1% da base.</dd></div>
+            </dl>
+          </li>
+
+          <li class="proposal">
+            <h3><span class="mono">02</span> Descoberta com perfil de gosto editável</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>O algoritmo é opaco. Você não sabe por que algo apareceu e só pode "ignorar"
+                    item por item.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Tela de "meu gosto" com pesos por gênero, tag, faixa de preço, duração,
+                    dificuldade e acessibilidade; cada recomendação carrega um "porquê" e um botão
+                    "menos disso" que ajusta o perfil visivelmente.</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 2" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>Recomendação opaca e não corrigível.</dd></div>
+              <div><dt>Hipótese</dt><dd>Controle explícito do perfil aumenta a relevância percebida
+                e a conversão de wishlist.</dd></div>
+              <div><dt>Solução</dt><dd>Perfil de gosto com pesos ajustáveis e "porquê" por
+                recomendação.</dd></div>
+              <div><dt>Métrica</dt><dd>CTR de recomendação; conversão wishlist → compra; taxa de
+                reembolso.</dd></div>
+              <div><dt>Quando não fazer</dt><dd>Se a maioria nunca abrir a tela de controle, o custo
+                de manutenção não se paga. Testar versão leve antes.</dd></div>
+            </dl>
+          </li>
+
+          <li class="proposal">
+            <h3><span class="mono">03</span> Reformar a página de produto pelo topo</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>A primeira dobra dá espaço a trailer e arte, mas não responde "que jogo é
+                    esse?". É preciso rolar para achar gênero, duração, modos e compatibilidade.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Ficha técnica padronizada acima da dobra: uma frase do que é o jogo + gênero +
+                    modos + duração média + compatibilidade detectada com o hardware da conta, com
+                    dados verificados, não só marketing do publisher.</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 3" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>A dobra não responde à pergunta mais básica sobre o jogo.</dd></div>
+              <div><dt>Hipótese</dt><dd>Um resumo estruturado no topo reduz o tempo de decisão e a
+                taxa de reembolso.</dd></div>
+              <div><dt>Solução</dt><dd>Ficha técnica acima da dobra + aviso automático de
+                compatibilidade via Hardware Survey da conta.</dd></div>
+              <div><dt>Métrica</dt><dd>Tempo na página antes da decisão; reembolso por motivo "não
+                roda" e "não é o que eu esperava".</dd></div>
+            </dl>
+          </li>
+
+          <li class="proposal">
+            <h3><span class="mono">04</span> Reembolso self-service e transparente</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>Assimetria entre comprar (fácil) e devolver (labiríntico). Corrói confiança e
+                    gera custo de suporte.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Na biblioteca, jogos elegíveis mostram "Reembolso disponível até [data]" com
+                    botão de dois passos, quando dentro da política (menos de 2h jogadas e 14 dias).</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 4" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>Comprar é fácil, devolver é labiríntico.</dd></div>
+              <div><dt>Hipótese</dt><dd>Reembolso direto na biblioteca aumenta a confiança para
+                comprar sem aumentar muito a taxa de reembolso.</dd></div>
+              <div><dt>Solução</dt><dd>Botão de reembolso de dois passos em jogos elegíveis, com
+                prazo visível.</dd></div>
+              <div><dt>Métrica</dt><dd>Conversão de compra; CSAT do suporte; volume de tickets;
+                taxa de reembolso total.</dd></div>
+              <div><dt>Contra-argumento honesto</dt><dd>Menos atrito pode aumentar abuso, e
+                desenvolvedores pequenos sofrem mais. A solução precisa de um limite por conta.</dd></div>
+            </dl>
+          </li>
+
+          <li class="proposal">
+            <h3><span class="mono">05</span> Unificar o design system</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>Quatro gerações de interface convivendo: loja renovada, comunidade de 2011,
+                    Big Picture / Deck, chat.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Biblioteca de componentes única entre cliente, web, Big Picture e SteamOS,
+                    com tokens que se adaptam ao paradigma de entrada (mouse / toque / controle)
+                    em vez de interfaces separadas.</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 5" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>Quatro gerações de UI coexistindo.</dd></div>
+              <div><dt>Hipótese</dt><dd>Um sistema único de tokens, tipografia e componentes reduz
+                carga cognitiva e custo de manutenção.</dd></div>
+              <div><dt>Solução</dt><dd>Componentes únicos com tokens adaptáveis ao input.</dd></div>
+              <div><dt>Métrica</dt><dd>Consistência por auditoria; velocidade de entrega;
+                sucesso de tarefa de usuários novos.</dd></div>
+            </dl>
+          </li>
+
+          <li class="proposal">
+            <h3><span class="mono">06</span> Onboarding de 60 segundos</h3>
+            <div class="proposal__slider" data-ba>
+              <div class="ba">
+                <div class="ba__before"><span class="mono">antes</span>
+                  <p>Nenhuma orientação inicial. Você cai na loja e se vira.</p>
+                </div>
+                <div class="ba__after"><span class="mono">depois</span>
+                  <p>Fluxo curto no primeiro login: escolher 5 gêneros, entender wishlist,
+                    reembolso e biblioteca. Pulável, e nunca repetido.</p>
+                </div>
+                <input type="range" class="ba__range" min="0" max="100" value="50"
+                  aria-label="Comparar antes e depois: proposta 6" />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <dl class="proposal__phsm">
+              <div><dt>Problema</dt><dd>Nenhuma orientação inicial.</dd></div>
+              <div><dt>Hipótese</dt><dd>Um onboarding curto melhora a ativação sem irritar quem já
+                conhece.</dd></div>
+              <div><dt>Solução</dt><dd>Fluxo pulável de 60s no primeiro login.</dd></div>
+              <div><dt>Métrica</dt><dd>Tempo até o primeiro jogo instalado; retenção D7 de contas
+                novas.</dd></div>
+            </dl>
+          </li>
+        </ol>
+
+        <div class="verdict verdict--mixed" data-verdict>
+          <span class="verdict__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 4 L20 12 L12 20 L4 12 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <p class="verdict__label">Veredito · Espaço para produto, não para estética</p>
+          <p class="verdict__body">O desafio de design mais interessante da Steam hoje é
+            arquitetura da informação e descoberta em escala.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 09 — APROFUNDAMENTOS (carrossel)                           -->
+    <!-- ========================================================= -->
+    <section class="section deepdives" id="aprofundamentos" aria-labelledby="deep-title">
+      <div class="u-container">
+        <header class="section-head">
+          <p class="section-head__index mono">09</p>
+          <h2 class="section-head__title display" id="deep-title">Aprofundamentos</h2>
+        </header>
+        <p class="prose">Os tópicos extras que a atividade pede. Arraste, use as setas ou o
+          teclado.</p>
+      </div>
+
+      <div class="carousel" data-carousel>
+        <div class="carousel__viewport" data-carousel-viewport>
+          <ul class="carousel__track" data-carousel-track>
+            <li class="card">
+              <p class="card__k mono">A</p>
+              <h3>Placar heurístico de Nielsen</h3>
+              <p>Nota consolidada do grupo, de 0 (sem problema) a 4 (catastrófico). A tabela é o
+                formato, não o gabarito — ajustar conforme a avaliação real.</p>
+              <div class="datatable__scroll">
+                <table class="card__table">
+                  <thead>
+                    <tr><th scope="col">#</th><th scope="col">Heurística</th><th scope="col">Nota</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="mono">1</td><td>Visibilidade do status do sistema</td><td class="mono">0–1</td></tr>
+                    <tr><td class="mono">2</td><td>Correspondência com o mundo real</td><td class="mono">3</td></tr>
+                    <tr><td class="mono">3</td><td>Controle e liberdade do usuário</td><td class="mono">2</td></tr>
+                    <tr><td class="mono">4</td><td>Consistência e padrões</td><td class="mono">3</td></tr>
+                    <tr><td class="mono">5</td><td>Prevenção de erros</td><td class="mono">2</td></tr>
+                    <tr><td class="mono">6</td><td>Reconhecer em vez de lembrar</td><td class="mono">3</td></tr>
+                    <tr><td class="mono">7</td><td>Flexibilidade e eficiência</td><td class="mono">1</td></tr>
+                    <tr><td class="mono">8</td><td>Estético e minimalista</td><td class="mono">3</td></tr>
+                    <tr><td class="mono">9</td><td>Reconhecer e recuperar erros</td><td class="mono">2</td></tr>
+                    <tr><td class="mono">10</td><td>Ajuda e documentação</td><td class="mono">2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">B</p>
+              <h3>Análise competitiva</h3>
+              <div class="datatable__scroll">
+                <table class="card__table">
+                  <thead>
+                    <tr><th scope="col">Plataforma</th><th scope="col">Faz melhor</th><th scope="col">Faz pior</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Epic Games Store</th><td>interface limpa, split de receita melhor para dev</td><td>catálogo menor, sem reviews robustas, sem Workshop, busca fraca</td></tr>
+                    <tr><th scope="row">GOG Galaxy</th><td>jogos sem DRM, agrega bibliotecas de outras lojas</td><td>catálogo menor, menos social</td></tr>
+                    <tr><th scope="row">itch.io</th><td>descoberta indie genuína, controle do criador na página</td><td>qualidade irregular, sem launcher forte</td></tr>
+                    <tr><th scope="row">Xbox / Game Pass</th><td>assinatura, integração com console</td><td>biblioteca não é sua, catálogo rotativo</td></tr>
+                    <tr><th scope="row">PlayStation Store</th><td>curadoria e consistência visual</td><td>busca e filtro piores, preso ao ecossistema</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="card__foot">A Epic provou que interface mais limpa e dinheiro grátis não
+                bastam para quebrar o lock-in da Steam. É evidência empírica para a Pergunta 3.</p>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">C</p>
+              <h3>Um produto, três paradigmas de entrada</h3>
+              <p>Steam desktop (mouse + teclado), Big Picture (controle, a 3 metros da TV) e
+                Steam Deck (toque + controle, tela de 7"). São três produtos de interação
+                diferentes com o mesmo conteúdo.</p>
+              <p>É um dos melhores estudos de caso disponíveis sobre design responsivo a
+                <em>input</em>, não só a viewport: alvos crescem, navegação vira foco direcional,
+                densidade cai, texto cresce, e o teclado vira uma grade navegável por analógico.</p>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">D</p>
+              <h3>Lei de Conway aplicada</h3>
+              <p>"Organizações projetam sistemas que copiam sua própria estrutura de comunicação."
+                A Valve tem uma estrutura notoriamente plana e sem gerência formal, com times se
+                formando em torno de projetos.</p>
+              <p>O resultado visível na interface: cada área evolui no seu ritmo, com sua própria
+                linguagem, e nada força a unificação. A interface da Steam é um retrato da empresa
+                que a construiu — o insight que eleva o trabalho de "achei feio" para análise de
+                sistema.</p>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">E</p>
+              <h3>Economia comportamental na interface</h3>
+              <p>Para cada mecanismo, a linha é: informa uma decisão ou explora um viés?</p>
+              <ul class="card__list">
+                <li><strong>Ancoragem</strong> — preço antigo riscado ao lado do novo. <em>Preço
+                  riscado real informa.</em></li>
+                <li><strong>Escassez</strong> — contador regressivo de promoção. <em>Promoção
+                  sazonal e previsível: explora.</em></li>
+                <li><strong>Prova social</strong> — jogadores simultâneos, reviews, "amigos que
+                  possuem". <em>Informa.</em></li>
+                <li><strong>Efeito de dotação</strong> — biblioteca, horas e conquistas sempre
+                  visíveis. <em>Explora um viés.</em></li>
+                <li><strong>Aversão à perda</strong> — e-mail de "jogo da sua lista está em
+                  promoção". <em>Na fronteira.</em></li>
+                <li><strong>Custo afundado</strong> — horas jogadas em destaque no perfil.
+                  <em>Explora.</em></li>
+              </ul>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">F</p>
+              <h3>Métricas que provariam as propostas</h3>
+              <p>Métrica de guarda é o conceito mais valioso: toda melhoria tem um custo em outro
+                lugar.</p>
+              <div class="datatable__scroll">
+                <table class="card__table">
+                  <thead>
+                    <tr><th scope="col">Proposta</th><th scope="col">Métrica primária</th><th scope="col">Métrica de guarda</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Nav por tarefa</th><td>tempo para tarefas secundárias</td><td>conversão do funil de compra</td></tr>
+                    <tr><th scope="row">Perfil de gosto</th><td>conversão wishlist → compra</td><td>tempo de sessão</td></tr>
+                    <tr><th scope="row">Ficha técnica no topo</th><td>reembolso "não é o que eu esperava"</td><td>CTR do trailer</td></tr>
+                    <tr><th scope="row">Reembolso self-service</th><td>CSAT do suporte</td><td>taxa de reembolso total</td></tr>
+                    <tr><th scope="row">Design system</th><td>sucesso de tarefa de usuário novo</td><td>velocidade de entrega</td></tr>
+                    <tr><th scope="row">Onboarding</th><td>tempo até primeiro jogo instalado</td><td>churn D7</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+
+            <li class="card">
+              <p class="card__k mono">G</p>
+              <h3>Limitações do próprio trabalho</h3>
+              <ul class="card__list">
+                <li>A avaliação é heurística e especialista, não teste com usuários reais.
+                  Nenhuma conclusão substitui observar 5 pessoas usando a plataforma.</li>
+                <li>O grupo não tem acesso aos dados de uso da Valve. Toda hipótese sobre
+                  comportamento é inferência.</li>
+                <li>A Steam muda com frequência; a análise é um retrato de
+                  <span class="verificar verificar--sm">DATA DA ANÁLISE</span>.</li>
+                <li>Viés de familiaridade: quem usa a Steam há anos não simula a experiência de um
+                  usuário novo. O ideal seria recrutar alguém que nunca instalou.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="carousel__nav u-container">
+          <div class="carousel__buttons">
+            <button type="button" class="carousel__btn" data-carousel-prev aria-label="Card anterior">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button type="button" class="carousel__btn" data-carousel-next aria-label="Próximo card">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Ir para o card"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 10 — VEREDITO FINAL                                        -->
+    <!-- ========================================================= -->
+    <section class="finalverdict" id="veredito" aria-labelledby="final-title">
+      <div class="u-container finalverdict__inner">
+        <p class="finalverdict__index mono">10 · Veredito final</p>
+        <div class="ratingbar" data-final-verdict>
+          <span class="ratingbar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path d="M12 4 L20 18 L4 18 Z" fill="currentColor" />
+            </svg>
+          </span>
+          <p class="ratingbar__label display" id="final-title">Muito positivas</p>
+          <p class="ratingbar__meta mono">avaliação desta análise · com ressalvas estruturais</p>
+        </div>
+        <p class="finalverdict__body">
+          A Steam é uma plataforma excelente no nível do componente e mediana no nível do
+          sistema. Resolve muito bem os problemas que resolveu primeiro — comprar, baixar,
+          jogar, avaliar — e carrega vinte anos de camadas acumuladas em tudo que veio depois.
+          Retém usuários por uma mistura de valor genuíno e custo de troca alto, e o desafio de
+          design mais interessante que enfrenta hoje não é estético: é de arquitetura da
+          informação e de descoberta em escala.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 11 — CRÉDITOS E REFERÊNCIAS                                -->
+    <!-- ========================================================= -->
+    <section class="section credits" id="creditos" aria-labelledby="credits-title">
+      <div class="u-container">
+        <header class="section-head section-head--quiet">
+          <p class="section-head__index mono">11</p>
+          <h2 class="section-head__title display" id="credits-title">Créditos e<br />referências</h2>
+        </header>
+
+        <div class="credits__grid">
+          <div>
+            <h3 class="credits__sub">Grupo</h3>
+            <ul class="credits__list">
+              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 1</span></li>
+              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 2</span></li>
+              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 3</span></li>
+              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 4</span></li>
+            </ul>
+            <p class="credits__meta mono">
+              Disciplina: <span class="verificar verificar--sm">DISCIPLINA</span><br />
+              Instituição: <span class="verificar verificar--sm">INSTITUIÇÃO</span><br />
+              Data da análise: <span class="verificar verificar--sm">DATA</span>
+            </p>
+          </div>
+
+          <div>
+            <h3 class="credits__sub">Referências</h3>
+            <ul class="credits__refs">
+              <li>Nielsen, J. — <a href="https://www.nngroup.com/articles/ten-usability-heuristics/"
+                  rel="noopener">10 Usability Heuristics for User Interface Design</a>, Nielsen
+                Norman Group.</li>
+              <li>W3C — <a href="https://www.w3.org/TR/WCAG22/" rel="noopener">Web Content
+                  Accessibility Guidelines (WCAG) 2.2</a>.</li>
+              <li>Krug, S. — <em>Não Me Faça Pensar</em>.</li>
+              <li>Norman, D. — <em>O Design do Dia a Dia</em>.</li>
+              <li><a href="https://partner.steamgames.com/doc/home" rel="noopener">Documentação e
+                  blog oficial da Valve</a> (Steamworks, notas de atualização do cliente).</li>
+              <li><a href="https://steamdb.info/" rel="noopener">SteamDB</a> — dados de catálogo e
+                usuários simultâneos.</li>
+              <li><a href="https://store.steampowered.com/hwsurvey/" rel="noopener">Steam Hardware
+                  &amp; Software Survey</a> — perfil de hardware da base.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note note--audit" role="note">
+          <p class="note__k mono">Autoauditoria deste site</p>
+          <ul class="credits__list">
+            <li>Contraste medido — <span class="mono">--paper / --void = 15.9:1</span>,
+              <span class="mono">--muted / --void = 7.4:1</span>. A cor
+              <span class="mono">--negative</span> sobre <span class="mono">--void</span> mede
+              <span class="mono">4.18:1</span>: por isso ela só aparece em texto grande, borda e
+              ícone, nunca no corpo.</li>
+            <li>A cena 3D é <span class="mono">aria-hidden</span> e decorativa. Nenhuma informação
+              existe só dentro dela.</li>
+            <li><span class="mono">prefers-reduced-motion</span> desliga parallax, smooth-scroll,
+              autoplay e a animação da cena; todo estado disparado por clique continua.</li>
+            <li>Sem WebGL, o hero vira uma grade estática em CSS e a seção 02 vira um diagrama de
+              três painéis.</li>
+            <li>Nenhum asset é hotlink de servidor da Valve. As capturas devem ser feitas pelo
+              grupo e colocadas em <span class="mono">/public/img/</span>, com fins de citação
+              acadêmica. A logo da Valve/Steam não é usada como marca deste site.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="u-container site-footer__inner">
+          <p class="mono">steam_ux_audit.pkg · trabalho acadêmico · sem afiliação com a Valve
+            Corporation</p>
+          <a class="site-footer__top" href="#topo" data-signal>Recomeçar a auditoria ↑</a>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
