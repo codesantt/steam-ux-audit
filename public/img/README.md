@@ -11,7 +11,7 @@ tracejado no lugar (o `onerror` do `<img>` cuida disso).
 | arquivo | onde aparece | status | o que é |
 |---|---|---|---|
 | `steam-home.png` | Seção 03 — Contexto ("a home é um leilão de atenção") | **OK** (Igor, 6 set 2026) | Home da loja Steam, várias faixas de conteúdo competindo. |
-| `steam-product-page.png` | Pergunta 2 — hotspots | **provisório** | Página de produto de **Hades** (`store.steampowered.com/app/1145360`), em pt-BR, **sem sessão iniciada**. 1280×1042. Mostra: barra de análises, marcadores da comunidade, o aviso de "Inicie a sessão…" no lugar dos botões de lista de desejos, e o bloco "Comprar Hades" com preço + botão verde. |
+| `steam-product-page.png` | Pergunta 2 — hotspots | **provisório** | Página de produto de **Red Dead Redemption 2** (`store.steampowered.com/app/1174180`), **em promoção**, em pt-BR, **sem sessão iniciada**. 1280×1089. Mostra: barra de análises, marcadores da comunidade, o aviso de "Inicie a sessão…" no lugar dos botões de lista de desejos, e o bloco de compra com selo -75%, preço riscado R$ 299,90 e botão verde. |
 
 ### Pergunta 2 — a captura é UMA só
 
@@ -25,15 +25,16 @@ daquele elemento:
 4. preço (e o preço riscado, quando em promoção)
 5. marcadores da comunidade (as tags)
 
-A que está no repositório serve, mas foi tirada **deslogado**, então os botões
-"lista de desejos / seguir / ignorar" não aparecem (vira o aviso "Inicie a
-sessão…"). Se quiserem, refaçam **logados no Steam** para os botões reais
-aparecerem — de preferência com o jogo em promoção, para pegar o preço
-riscado. Basta substituir `steam-product-page.png` pelo novo arquivo.
+A que está no repositório (RDR2 em promoção) cobre 4 dos 5 pontos com
+elemento real, incluindo o preço riscado. O único que fica no aviso "Inicie
+a sessão…" é o ponto 3 (lista de desejos / seguir / ignorar), porque a
+captura é **deslogada**. Se quiserem os três botões reais, refaçam **logados
+no Steam** e substituam `steam-product-page.png` — a promoção acaba em
+8 de setembro, então tem que ser antes disso para manter o preço riscado.
 
 As posições dos 5 pontos são porcentagens (`--x` / `--y` em cada
 `<button class="hotspot">` no `index.html`) e o recorte da moldura é
-`.img-frame--product { aspect-ratio: 1280 / 1042 }` no `css/styles.css`.
+`.img-frame--product { aspect-ratio: 1280 / 1089 }` no `css/styles.css`.
 Se a nova captura tiver outra proporção, ajustem esses dois pontos — me
 peçam que eu faço.
 

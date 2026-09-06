@@ -856,7 +856,7 @@ ul, ol { list-style: none; }
 /* captura de página de produto (P2): proporção da imagem atual.
    Ao trocar o arquivo, ajuste este aspect-ratio e as posições --x/--y
    dos .hotspot no index.html. */
-.img-frame--product { aspect-ratio: 1280 / 1042; }
+.img-frame--product { aspect-ratio: 1280 / 1089; }
 .img-frame--product img { object-fit: cover; }
 .img-frame figcaption {
   position: absolute;
