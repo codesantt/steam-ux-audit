@@ -8,15 +8,34 @@ tracejado no lugar (o `onerror` do `<img>` cuida disso).
 
 ## Arquivos referenciados pelo `index.html`
 
-| arquivo | onde aparece | status | o que é / o que capturar |
+| arquivo | onde aparece | status | o que é |
 |---|---|---|---|
 | `steam-home.png` | Seção 03 — Contexto ("a home é um leilão de atenção") | **OK** (Igor, 6 set 2026) | Home da loja Steam, várias faixas de conteúdo competindo. |
-| `steam-product-page.png` | Pergunta 2 — hotspots | **FALTA** | Página de **produto** de um jogo (`store.steampowered.com/app/...`). Precisa mostrar, na mesma captura: a barra de avaliações, o botão verde de compra, os botões "Lista de desejos / Seguir / Ignorar", as tags da comunidade e (rolando um pouco) os requisitos de sistema. Enquadrar em ~16:10. Página sem age gate ajuda (ex.: Dota 2, Hades, Stardew Valley). |
+| `steam-product-page.png` | Pergunta 2 — hotspots | **provisório** | Página de produto de **Hades** (`store.steampowered.com/app/1145360`), em pt-BR, **sem sessão iniciada**. 1280×1042. Mostra: barra de análises, marcadores da comunidade, o aviso de "Inicie a sessão…" no lugar dos botões de lista de desejos, e o bloco "Comprar Hades" com preço + botão verde. |
 
-Os hotspots numerados da Pergunta 2 estão posicionados por porcentagem
-(`--x` / `--y` em cada `<button class="hotspot">` no `index.html`). Depois de
-colocar `steam-product-page.png`, ajuste esses valores para cada número cair
-sobre o elemento certo.
+### Pergunta 2 — a captura é UMA só
+
+É um print de **uma** página de produto (a página de um jogo específico na
+loja). Sobre ela ficam 5 pontos numerados; clicar em cada um abre a crítica
+daquele elemento:
+
+1. barra de análises ("Extremamente positivas / Muito positivas …")
+2. botão verde de compra
+3. lista de desejos / seguir / ignorar
+4. preço (e o preço riscado, quando em promoção)
+5. marcadores da comunidade (as tags)
+
+A que está no repositório serve, mas foi tirada **deslogado**, então os botões
+"lista de desejos / seguir / ignorar" não aparecem (vira o aviso "Inicie a
+sessão…"). Se quiserem, refaçam **logados no Steam** para os botões reais
+aparecerem — de preferência com o jogo em promoção, para pegar o preço
+riscado. Basta substituir `steam-product-page.png` pelo novo arquivo.
+
+As posições dos 5 pontos são porcentagens (`--x` / `--y` em cada
+`<button class="hotspot">` no `index.html`) e o recorte da moldura é
+`.img-frame--product { aspect-ratio: 1280 / 1042 }` no `css/styles.css`.
+Se a nova captura tiver outra proporção, ajustem esses dois pontos — me
+peçam que eu faço.
 
 ## Formato
 

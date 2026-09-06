@@ -853,6 +853,11 @@ ul, ol { list-style: none; }
 /* referência de página inteira: mostrar a imagem completa, sem crop */
 .img-frame--wide { aspect-ratio: 1921 / 1079; }
 .img-frame--wide img { object-fit: contain; object-position: top; }
+/* captura de página de produto (P2): proporção da imagem atual.
+   Ao trocar o arquivo, ajuste este aspect-ratio e as posições --x/--y
+   dos .hotspot no index.html. */
+.img-frame--product { aspect-ratio: 1280 / 1042; }
+.img-frame--product img { object-fit: cover; }
 .img-frame figcaption {
   position: absolute;
   left: 0; bottom: 0;

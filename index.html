@@ -591,23 +591,28 @@
           </div>
 
           <div class="hotspots__stage">
-            <figure class="img-frame" data-vision-target>
-              <img src="public/img/steam-product-page.png" alt="Captura da página de produto da
-                loja Steam, com trailer, arte, barra de avaliações, preço e botões de lista de
-                desejos, seguir e ignorar. Captura a ser feita pelo grupo." loading="lazy"
+            <figure class="img-frame img-frame--product" data-vision-target>
+              <img src="public/img/steam-product-page.png" alt="Captura da página de produto de
+                Hades na loja Steam, em português: trilha superior, breadcrumb, área de mídia com
+                trailer, coluna direita com resumo de análises ('Extremamente positivas'), data de
+                lançamento, desenvolvedora e os marcadores da comunidade; abaixo, o aviso 'Inicie a
+                sessão para adicionar à lista de desejos, seguir ou ignorar' e o bloco 'Comprar
+                Hades' com preço e o botão verde '+ Carrinho'. Captura do grupo, 6 set 2026."
+                loading="lazy"
                 onerror="this.closest('.img-frame').classList.add('is-missing')" />
-              <figcaption class="mono">public/img/steam-product-page.png · captura do grupo</figcaption>
+              <figcaption class="mono">public/img/steam-product-page.png · página de Hades · captura
+                do grupo · 6 set 2026 (sessão não iniciada)</figcaption>
 
-              <button type="button" class="hotspot" style="--x:24%;--y:30%" data-hotspot="avaliacoes"
+              <button type="button" class="hotspot" style="--x:82%;--y:37%" data-hotspot="avaliacoes"
                 aria-label="Hotspot 1: barra de avaliações" aria-expanded="false">1</button>
-              <button type="button" class="hotspot" style="--x:78%;--y:24%" data-hotspot="botao"
-                aria-label="Hotspot 2: botão verde de ação" aria-expanded="false">2</button>
-              <button type="button" class="hotspot" style="--x:80%;--y:52%" data-hotspot="acoes"
+              <button type="button" class="hotspot" style="--x:59%;--y:85%" data-hotspot="botao"
+                aria-label="Hotspot 2: botão verde de compra" aria-expanded="false">2</button>
+              <button type="button" class="hotspot" style="--x:22%;--y:66%" data-hotspot="acoes"
                 aria-label="Hotspot 3: lista de desejos, seguir e ignorar" aria-expanded="false">3</button>
-              <button type="button" class="hotspot" style="--x:20%;--y:68%" data-hotspot="requisitos"
-                aria-label="Hotspot 4: requisitos de sistema" aria-expanded="false">4</button>
-              <button type="button" class="hotspot" style="--x:52%;--y:84%" data-hotspot="tags"
-                aria-label="Hotspot 5: tags da comunidade" aria-expanded="false">5</button>
+              <button type="button" class="hotspot" style="--x:50%;--y:85%" data-hotspot="preco"
+                aria-label="Hotspot 4: preço e ancoragem" aria-expanded="false">4</button>
+              <button type="button" class="hotspot" style="--x:82%;--y:58%" data-hotspot="tags"
+                aria-label="Hotspot 5: marcadores da comunidade" aria-expanded="false">5</button>
             </figure>
 
             <div class="hotspots__readout" role="region" aria-live="polite" aria-label="Detalhe do hotspot">
@@ -621,24 +626,31 @@
                   mudou?" com o mesmo componente.</p>
               </article>
               <article data-hotspot-body="botao" hidden>
-                <h3><span class="mono">2</span> Botão verde</h3>
+                <h3><span class="mono">2</span> Botão verde de compra</h3>
                 <p class="tag-good mono">comunica com excelência</p>
                 <p>Ação primária sempre da mesma cor, sempre no mesmo lugar da hierarquia. Custa
-                  nada e resolve tudo.</p>
+                  nada e resolve tudo. Ressalva medida: o texto branco sobre o verde tem contraste
+                  de <span class="mono">2,04:1</span> — abaixo do mínimo de 3:1 até para texto
+                  grande. O componente comunica bem, mas falha o critério.</p>
               </article>
               <article data-hotspot-body="acoes" hidden>
                 <h3><span class="mono">3</span> Lista de desejos · Seguir · Ignorar</h3>
                 <p class="tag-bad mono">atrapalha</p>
-                <p>Três ações parecidas, com significados diferentes, e a interface não explica a
+                <p>Nesta captura, sem sessão iniciada, o espaço vira só o aviso "Inicie a sessão
+                  para adicionar à lista de desejos, seguir ou ignorar". Logado, aparecem três
+                  ações parecidas, com significados diferentes, e a interface não explica a
                   diferença em lugar nenhum. Boa parte dos usuários usa a wishlist como "gostei" e
                   nunca descobre que "Seguir" existe para receber notícias sem sinalizar intenção
                   de compra.</p>
               </article>
-              <article data-hotspot-body="requisitos" hidden>
-                <h3><span class="mono">4</span> Requisitos de sistema</h3>
-                <p class="tag-good mono">comunica com excelência</p>
-                <p>Existem, são padronizados e ficam na mesma posição em toda página de produto.
-                  Consistência estrutural é o que permite comparação.</p>
+              <article data-hotspot-body="preco" hidden>
+                <h3><span class="mono">4</span> Preço e ancoragem</h3>
+                <p class="tag-bad mono">atrapalha</p>
+                <p>O preço fica pequeno (13&nbsp;px), colado ao botão, no canto do bloco de compra.
+                  Em promoção, o valor cheio aparece riscado ao lado do novo — ancoragem clássica —
+                  e medimos esse preço riscado da Steam em <span class="mono">2,64:1</span> de
+                  contraste, bem abaixo do mínimo. A informação que mais pesa na decisão está no
+                  canal visual mais fraco.</p>
               </article>
               <article data-hotspot-body="tags" hidden>
                 <h3><span class="mono">5</span> Tags da comunidade</h3>
@@ -1329,13 +1341,14 @@
           <div>
             <h3 class="credits__sub">Grupo</h3>
             <ul class="credits__list">
-              <li>Igor Alves</li>
-              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 2</span></li>
-              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 3</span></li>
-              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 4</span></li>
+              <li>Igor</li>
+              <li>Duda</li>
+              <li>Lívia</li>
+              <li>Vitor</li>
+              <li>Vitória</li>
             </ul>
             <p class="credits__meta mono">
-              Disciplina: <span class="verificar verificar--sm">DISCIPLINA</span><br />
+              Disciplina: UI/UX<br />
               Instituição: <span class="verificar verificar--sm">INSTITUIÇÃO</span><br />
               Data da análise: setembro de 2026
             </p>
