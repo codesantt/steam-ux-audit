@@ -134,12 +134,14 @@ const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   document.body.addEventListener('preloader:done', revealHero, { once: true });
   setTimeout(revealHero, 2600);
 
-  // failsafe: se algo travar, revela tudo em 4s
+  // failsafe: se o IntersectionObserver não disparar, força o estado final
+  // SEM transição (o .reveals-forced no CSS zera transições), evitando um
+  // cascão de animações e estados transitórios de baixo contraste.
   setTimeout(() => {
-    heads.forEach((h) => h.classList.add('is-in'));
-    hero && hero.classList.add('is-in');
-    flows.forEach((f) => f.classList.add('is-in'));
-  }, 4000);
+    if (root.classList.contains('reveals-forced')) return;
+    const anyStuck = heads.some((h) => !h.classList.contains('is-in'));
+    if (anyStuck) root.classList.add('reveals-forced');
+  }, 8000);
 
   root.classList.add('anim-ready');
 })();

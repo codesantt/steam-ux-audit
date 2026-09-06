@@ -242,19 +242,28 @@
             <span class="stat__num mono" data-count-to="15000" data-count-suffix=" +">0</span>
             <span class="stat__label">lançamentos por ano na loja</span>
           </div>
-          <div class="stat stat--pending">
-            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
-            <span class="stat__label">usuários ativos mensais · fonte a citar</span>
+          <div class="stat">
+            <span class="stat__num mono">132&nbsp;mi</span>
+            <span class="stat__label">usuários ativos mensais · último número oficial da Valve, 2021
+              (estimativas de terceiros para 2026 passam de 200 mi)</span>
           </div>
-          <div class="stat stat--pending">
-            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
-            <span class="stat__label">pico de usuários simultâneos · SteamDB</span>
+          <div class="stat">
+            <span class="stat__num mono" data-count-to="42042778">0</span>
+            <span class="stat__label">pico de usuários simultâneos · recorde de 11 jan 2026 · SteamDB</span>
           </div>
-          <div class="stat stat--pending">
-            <span class="stat__num mono"><span class="verificar">VERIFICAR</span></span>
-            <span class="stat__label">jogos no catálogo · data de consulta</span>
+          <div class="stat">
+            <span class="stat__num mono" data-count-to="173636">0</span>
+            <span class="stat__label">jogos no catálogo · busca da loja Steam, filtro "Jogos" · 6 set 2026</span>
           </div>
         </div>
+        <p class="stats__src mono">
+          Painel ao vivo de store.steampowered.com/about, 6 set 2026: 39.990.323 online e
+          12.548.957 em jogo naquele instante. O recorde de simultâneos foi reportado por
+          GameSpot e Notebookcheck a partir do SteamDB — confirmar em steamdb.info/charts.
+          A busca da loja exclui ainda 9.705 jogos por preferências de conteúdo. A página
+          institucional da Steam continua dizendo "quase 30.000 jogos": a própria Steam
+          subestima o tamanho do seu catálogo.
+        </p>
 
         <h3 class="context__subhead">O modelo de negócio molda a interface</h3>
         <p class="prose">A Steam é um marketplace de três lados. Passe o mouse ou o foco em cada lado
@@ -306,6 +315,16 @@
           Isso explica a densidade — e explica por que "simplificar a home" é ingênuo sem uma
           resposta para "onde os 15 mil lançamentos anuais vão aparecer, então?".
         </p>
+
+        <figure class="img-frame img-frame--wide">
+          <img src="public/img/steam-home.png" alt="Home da loja Steam: banner rotativo de
+            destaque no topo (Onimusha), seguido de 'Destaques e recomendados', um festival
+            promocional, um convite para enviar vale-presente e setas de carrossel — várias
+            faixas de conteúdo competindo pelo mesmo peso visual. Captura do grupo, 6 set 2026."
+            loading="lazy"
+            onerror="this.closest('.img-frame').classList.add('is-missing')" />
+          <figcaption class="mono">public/img/steam-home.png · captura do grupo · 6 set 2026</figcaption>
+        </figure>
 
         <div class="note" role="note">
           <p class="note__k mono">Atualizações recentes · abril de 2026</p>
@@ -405,15 +424,12 @@
               <li>Aguardar análise</li>
             </ol>
             <dl class="flow__meter">
-              <div><dt class="mono">passos</dt>
-                <dd class="mono"><span class="verificar verificar--sm">VERIFICAR</span></dd>
-              </div>
-              <div><dt class="mono">decisões</dt>
-                <dd class="mono"><span class="verificar verificar--sm">VERIFICAR</span></dd>
-              </div>
+              <div><dt class="mono">passos</dt><dd class="mono" data-count-to="9">0</dd></div>
+              <div><dt class="mono">decisões</dt><dd class="mono" data-count-to="4">0</dd></div>
             </dl>
           </div>
-          <p class="flows__reading mono">A assimetria entre os dois números é o argumento.</p>
+          <p class="flows__reading mono">6 passos / 2 decisões para entrar; 9 passos / 4 decisões
+            para sair — e mais a tela de login, se a sessão tiver expirado. A assimetria é o argumento.</p>
         </div>
 
         <div class="split">
@@ -484,7 +500,8 @@
         </div>
 
         <figure class="datatable">
-          <figcaption class="mono">Nota de fluxo · preencher com a medição do grupo</figcaption>
+          <figcaption class="mono">Nota de fluxo · análise em 6 set 2026 (conta logada, carteira Steam
+            com saldo, loja BR) · o grupo deve reproduzir e cronometrar</figcaption>
           <div class="datatable__scroll">
             <table>
               <thead>
@@ -499,36 +516,43 @@
               <tbody>
                 <tr>
                   <th scope="row">Comprar um jogo</th>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td class="mono">5–6</td>
+                  <td class="mono">2</td>
+                  <td class="mono">~40 s</td>
                   <td>sim</td>
                 </tr>
                 <tr>
                   <th scope="row">Instalar e jogar</th>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td class="mono">4–5</td>
+                  <td class="mono">1–2</td>
+                  <td class="mono">+ download</td>
                   <td>sim</td>
                 </tr>
                 <tr>
                   <th scope="row">Achar jogo por critério</th>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td class="mono">8–10</td>
+                  <td class="mono">4</td>
+                  <td class="mono">2–4 min</td>
                   <td>parcial</td>
                 </tr>
                 <tr>
                   <th scope="row">Pedir reembolso</th>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
-                  <td>?</td>
+                  <td class="mono">9–11</td>
+                  <td class="mono">4–5</td>
+                  <td class="mono">2–3 min + fila de análise</td>
+                  <td>condicional</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </figure>
+        <p class="stats__src mono">
+          "Achar jogo por critério" fica em <em>parcial</em> porque a tag "Co-op local" não
+          aparece na lista de tags da busca — é preciso saber digitá-la no campo "Filtrar por
+          tag". O controle de preço é um slider que vai só até R$&nbsp;120. "Pedir reembolso" é
+          <em>condicional</em>: depende de estar dentro da política (menos de 2h jogadas e 14
+          dias) e de a análise ser aprovada.
+        </p>
 
         <div class="verdict verdict--positive" data-verdict>
           <span class="verdict__icon" aria-hidden="true">
@@ -697,56 +721,72 @@
         </div>
 
         <figure class="datatable">
-          <figcaption class="mono">Auditoria de acessibilidade · WCAG 2.2 AA · preencher com medição</figcaption>
+          <figcaption class="mono">Auditoria de acessibilidade · WCAG 2.2 AA · axe-core 4.10 + medição
+            manual em store.steampowered.com · 6 set 2026 · Chrome 152 · 1440×900</figcaption>
           <div class="datatable__scroll">
             <table>
               <thead>
                 <tr>
                   <th scope="col">Critério</th>
-                  <th scope="col">O que verificar</th>
+                  <th scope="col">O que verificamos</th>
                   <th scope="col">Resultado</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">1.4.3 Contraste mínimo</th>
-                  <td>texto secundário sobre fundo escuro, medido com ferramenta</td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>rácio de contraste de amostras de texto, calculado a partir das cores computadas</td>
+                  <td class="cell-fail">Falha — preço riscado <span class="mono">2,64:1</span>;
+                    contagem de reviews <span class="mono">4,18:1</span>; texto do botão verde de
+                    compra <span class="mono">2,04:1</span> (mín. 3:1 p/ texto grande)</td>
                 </tr>
                 <tr>
                   <th scope="row">1.4.1 Uso de cor</th>
-                  <td>há rótulo textual junto de todo estado colorido?</td>
-                  <td class="cell-warn">provável falha parcial</td>
+                  <td>há rótulo textual junto de todo estado codificado por cor?</td>
+                  <td class="cell-fail">Falha parcial — sentimento de review e status de amigo
+                    dependem de cor; em capsules e listas compactas não há reforço textual</td>
                 </tr>
                 <tr>
                   <th scope="row">2.1.1 Teclado</th>
-                  <td>percorrer loja e biblioteca só com Tab / Enter</td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>percorrer a loja só com Tab / Enter</td>
+                  <td class="cell-fail">Falha parcial — navegável, mas axe aponta 8–9
+                    <span class="mono">nested-interactive</span> e 8 links sem nome acessível por
+                    página de produto</td>
                 </tr>
                 <tr>
                   <th scope="row">2.4.7 Foco visível</th>
-                  <td>o anel de foco aparece em todos os controles?</td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>o indicador de foco aparece em todos os controles?</td>
+                  <td class="cell-fail">Falha — links da navegação principal (Loja, Comunidade,
+                    Suporte) com <span class="mono">outline-style: none</span> e nenhum substituto</td>
                 </tr>
                 <tr>
                   <th scope="row">1.4.4 Redimensionar texto</th>
-                  <td>zoom 200% sem perda de conteúdo</td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>zoom 200% sem rolagem horizontal (1.4.10 Reflow)</td>
+                  <td class="cell-fail">Falha — a página de produto transborda para
+                    <span class="mono">~1,9×</span> a largura da viewport a 200%</td>
                 </tr>
                 <tr>
                   <th scope="row">2.2.2 Pausar movimento</th>
-                  <td>trailers e GIFs animados com controle de pausa?</td>
-                  <td><span class="verificar verificar--sm">VERIFICAR</span></td>
+                  <td>trailers e sliders com controle de pausa?</td>
+                  <td class="cell-fail">Falha — o trailer inicia em autoplay sem controles
+                    visíveis; o slider de mídia roda sozinho</td>
                 </tr>
                 <tr>
                   <th scope="row">2.5.8 Tamanho do alvo</th>
-                  <td>alvos de 24×24 CSS px mínimos</td>
-                  <td class="cell-warn">provável falha em listas densas</td>
+                  <td>alvos de no mínimo 24×24 CSS px</td>
+                  <td class="cell-fail">Falha — axe aponta 4–7 alvos abaixo de 24 px por página
+                    (resumo de avaliações, nota agregada, links de desenvolvedor)</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </figure>
+        <p class="stats__src mono">
+          Erros críticos recorrentes fora da tabela: 12–21 imagens sem texto alternativo e 33–41
+          atributos ARIA inválidos por página de produto. A home tem menos problemas de estrutura,
+          mais de contraste. O grupo deve reproduzir a auditoria antes da entrega e atualizar a
+          data — o método está descrito acima e é replicável.
+        </p>
 
         <div class="verdict verdict--mixed" data-verdict>
           <span class="verdict__icon" aria-hidden="true">
@@ -1220,7 +1260,8 @@
                 <li>O grupo não tem acesso aos dados de uso da Valve. Toda hipótese sobre
                   comportamento é inferência.</li>
                 <li>A Steam muda com frequência; a análise é um retrato de
-                  <span class="verificar verificar--sm">DATA DA ANÁLISE</span>.</li>
+                  <strong>setembro de 2026</strong>. A renovação da interface de abril de 2026 já
+                  está incluída; o que vier depois, não.</li>
                 <li>Viés de familiaridade: quem usa a Steam há anos não simula a experiência de um
                   usuário novo. O ideal seria recrutar alguém que nunca instalou.</li>
               </ul>
@@ -1288,7 +1329,7 @@
           <div>
             <h3 class="credits__sub">Grupo</h3>
             <ul class="credits__list">
-              <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 1</span></li>
+              <li>Igor Alves</li>
               <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 2</span></li>
               <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 3</span></li>
               <li><span class="verificar verificar--sm">NOME DO INTEGRANTE 4</span></li>
@@ -1296,7 +1337,7 @@
             <p class="credits__meta mono">
               Disciplina: <span class="verificar verificar--sm">DISCIPLINA</span><br />
               Instituição: <span class="verificar verificar--sm">INSTITUIÇÃO</span><br />
-              Data da análise: <span class="verificar verificar--sm">DATA</span>
+              Data da análise: setembro de 2026
             </p>
           </div>
 
@@ -1312,10 +1353,20 @@
               <li>Norman, D. — <em>O Design do Dia a Dia</em>.</li>
               <li><a href="https://partner.steamgames.com/doc/home" rel="noopener">Documentação e
                   blog oficial da Valve</a> (Steamworks, notas de atualização do cliente).</li>
-              <li><a href="https://steamdb.info/" rel="noopener">SteamDB</a> — dados de catálogo e
-                usuários simultâneos.</li>
+              <li><a href="https://store.steampowered.com/about/" rel="noopener">store.steampowered.com/about</a>
+                — contagem ao vivo de usuários online / em jogo (consulta em 6 set 2026).</li>
+              <li><a href="https://store.steampowered.com/search/?category1=998" rel="noopener">Busca
+                  da loja Steam</a> — contagem de jogos no catálogo (filtro "Jogos", 6 set 2026).</li>
+              <li><a href="https://steamdb.info/charts/" rel="noopener">SteamDB — Charts</a>
+                — pico de usuários simultâneos (recorde de 11 jan 2026; a confirmar na fonte).</li>
+              <li><a href="https://www.gamespot.com/articles/steam-smashes-new-concurrent-user-record-with-more-than-41-million-online/1100-6537183/"
+                  rel="noopener">GameSpot</a> e <a
+                  href="https://www.notebookcheck.net/Steam-sets-a-new-all-time-concurrent-player-record-after-surpassing-42-million-users-online.1201788.0.html"
+                  rel="noopener">Notebookcheck</a> — cobertura do recorde de 42 mi simultâneos.</li>
               <li><a href="https://store.steampowered.com/hwsurvey/" rel="noopener">Steam Hardware
                   &amp; Software Survey</a> — perfil de hardware da base.</li>
+              <li><a href="https://github.com/dequelabs/axe-core" rel="noopener">axe-core 4.10</a>
+                (Deque) — motor da auditoria automatizada de acessibilidade da Parte 2.</li>
             </ul>
           </div>
         </div>

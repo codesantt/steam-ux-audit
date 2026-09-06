@@ -164,18 +164,24 @@ ul, ol { list-style: none; }
   margin-left: -0.04em;
 }
 .section-head--quiet .section-head__title { font-size: var(--fs-600); letter-spacing: -0.02em; }
-/* reveal (aplicado por JS; sem JS fica visível) */
+/* reveal (aplicado por JS; sem JS fica visível). Só o título anima —
+   um clip que não muda cor. O índice fica sempre visível. */
 .js .section-head__title { --clip: 0%; }
 .js .reveal-head .section-head__title {
   clip-path: inset(0 var(--clip) 0 0);
   transition: clip-path 0.9s var(--ease);
 }
 .js .reveal-head:not(.is-in) .section-head__title { --clip: 100%; }
-.js .reveal-head .section-head__index {
-  opacity: var(--o, 1);
-  transition: opacity 0.5s var(--ease) 0.15s;
+
+/* failsafe: força estado final sem transição (evita cascata de animação) */
+.reveals-forced .section-head__title,
+.reveals-forced .hero__title span,
+.reveals-forced .flow__nodes li {
+  clip-path: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
-.js .reveal-head:not(.is-in) .section-head__index { --o: 0; }
 
 .verificar {
   display: inline-block;
@@ -562,6 +568,7 @@ ul, ol { list-style: none; }
 }
 .stat__label { font-size: var(--fs-200); color: var(--muted); }
 .stat--pending .stat__num { font-size: 1rem; }
+.stats__src { color: var(--muted); max-width: 68ch; line-height: 1.7; }
 
 /* triangle */
 .triangle {
@@ -766,6 +773,17 @@ ul, ol { list-style: none; }
 .datatable tr:last-child td, .datatable tr:last-child th,
 .card__table tr:last-child td { border-bottom: 0; }
 .cell-warn { color: var(--mixed); }
+.cell-fail { color: var(--paper); }
+.cell-fail::before {
+  content: "✕";
+  display: inline-block;
+  margin-right: 0.5em;
+  color: var(--negative);
+  font-size: 1.15em;
+  font-weight: 700;
+  vertical-align: -0.05em;
+}
+.datatable td .mono { color: var(--positive); font-size: 0.92em; }
 
 /* verdict chip — cor + rótulo + ícone (nunca só cor) */
 .verdict {
@@ -832,6 +850,9 @@ ul, ol { list-style: none; }
   aspect-ratio: 16 / 10;
 }
 .img-frame img { width: 100%; height: 100%; object-fit: cover; }
+/* referência de página inteira: mostrar a imagem completa, sem crop */
+.img-frame--wide { aspect-ratio: 1921 / 1079; }
+.img-frame--wide img { object-fit: contain; object-position: top; }
 .img-frame figcaption {
   position: absolute;
   left: 0; bottom: 0;
@@ -841,7 +862,7 @@ ul, ol { list-style: none; }
 }
 .img-frame.is-missing img { display: none; }
 .img-frame.is-missing::before {
-  content: "captura ausente · public/img/steam-product-page.png";
+  content: "captura ausente — ver public/img/ e a legenda abaixo";
   position: absolute; inset: 0;
   display: grid; place-items: center;
   padding: 24px;
