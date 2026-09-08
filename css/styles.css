@@ -550,21 +550,30 @@ ul, ol { list-style: none; }
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
   gap: 1px;
   background: var(--steel);
   border: 1px solid var(--steel);
   border-radius: 4px;
   overflow: hidden;
 }
-.stat { background: var(--void); padding: 22px; display: grid; gap: 8px; align-content: start; }
+.stat {
+  background: var(--void);
+  padding: 22px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0; /* deixa a coluna encolher em vez de estourar o número */
+}
 .stat__num {
   font-family: var(--ff-mono);
   font-weight: 700;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  line-height: 1.1;
   color: var(--paper);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere; /* rede de segurança: nunca corta */
 }
 .stat__label { font-size: var(--fs-200); color: var(--muted); }
 .stat--pending .stat__num { font-size: 1rem; }
